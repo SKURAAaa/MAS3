@@ -58,6 +58,12 @@ public class Program
         workingStudent.Work();
         workingStudent.Study();
 
+        employee.EmployeeMethod();
+        student.StudentMethod();
+        pensioner.PensionerMethod();
+        workingStudent.EmployeeMethod();
+        workingStudent.StudentMethod();
+
         Console.WriteLine($"Employee Income: {employee.GetIncome()}");
         Console.WriteLine($"Student Income: {student.GetIncome()}");
         Console.WriteLine($"Pensioner Income: {pensioner.GetIncome()}");

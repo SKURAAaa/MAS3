@@ -52,28 +52,14 @@ public class DynamicReptile : DynamicAnimal
 // Klasa, która łączy dynamiczne zwierzęta z ich środowiskiem życia
 public class DynamicHabitatAnimal
 {
+    // Dynamiczne dziedziczenie poprzez agregację/kompozycję z ograniczeniem {xor}
     private DynamicAnimal _animal;
     private IHabitat _habitat;
 
-    public DynamicHabitatAnimal(DynamicAnimal animal, IHabitat habitat)
+    public DynamicHabitatAnimal(DynamicAnimal animal, IHabitat habitat = null)
     {
         _animal = animal;
         _habitat = habitat;
-    }
-
-    public void MakeSound()
-    {
-        _animal.MakeSound();
-    }
-
-    public void DescribeAnimal()
-    {
-        _animal.DescribeAnimal();
-    }
-
-    public void DescribeHabitat()
-    {
-        _habitat.DescribeHabitat();
     }
 
     public void ChangeAnimal(DynamicAnimal newAnimal)
@@ -84,5 +70,20 @@ public class DynamicHabitatAnimal
     public void ChangeHabitat(IHabitat newHabitat)
     {
         _habitat = newHabitat;
+    }
+
+    public void MakeSound()
+    {
+        _animal?.MakeSound();
+    }
+
+    public void DescribeAnimal()
+    {
+        _animal?.DescribeAnimal();
+    }
+
+    public void DescribeHabitat()
+    {
+        _habitat?.DescribeHabitat();
     }
 }

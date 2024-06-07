@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using System;
+using System.Collections.Generic;
+
 public class Zoo
 {
     public string Name { get; set; }
@@ -30,6 +33,7 @@ public class Zoo
     }
 }
 
+
 // Dziedziczenie wieloaspektowe dla członków zoo
 
 // Klasa bazowa dla członków zoo
@@ -52,14 +56,51 @@ public abstract class ZooMember
     }
 
     public abstract double GetIncome();
+
+    // Metody specyficzne dla różnych typów członków zoo
+    public void EmployeeMethod()
+    {
+        if (MemberTypes.Contains(ZooMemberType.Employee))
+        {
+            Console.WriteLine($"{Name} wykonuje metodę pracownika.");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} nie jest pracownikiem.");
+        }
+    }
+
+    public void StudentMethod()
+    {
+        if (MemberTypes.Contains(ZooMemberType.Student))
+        {
+            Console.WriteLine($"{Name} wykonuje metodę studenta.");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} nie jest studentem.");
+        }
+    }
+
+    public void PensionerMethod()
+    {
+        if (MemberTypes.Contains(ZooMemberType.Pensioner))
+        {
+            Console.WriteLine($"{Name} wykonuje metodę emeryta.");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} nie jest emerytem.");
+        }
+    }
 }
 
-// Typy członków zoo
 public enum ZooMemberType
 {
     Employee,
     Student,
-    Pensioner
+    Pensioner,
+    WorkingStudent
 }
 
 // Klasa dla pracowników
@@ -149,11 +190,25 @@ public class WorkingStudent : ZooMember
 
     public void Work()
     {
-        Console.WriteLine($"{Name} pracuje.");
+        if (MemberTypes.Contains(ZooMemberType.Employee))
+        {
+            Console.WriteLine($"{Name} pracuje.");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} nie jest pracownikiem.");
+        }
     }
 
     public void Study()
     {
-        Console.WriteLine($"{Name} studiuje.");
+        if (MemberTypes.Contains(ZooMemberType.Student))
+        {
+            Console.WriteLine($"{Name} studiuje.");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} nie jest studentem.");
+        }
     }
 }

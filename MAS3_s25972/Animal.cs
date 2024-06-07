@@ -1,5 +1,6 @@
 ﻿using System;
 
+// Klasa abstrakcyjna/polimorfizm
 public abstract class Animal
 {
     public string Name { get; set; }
