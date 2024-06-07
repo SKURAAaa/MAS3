@@ -1,49 +1,88 @@
 ﻿using System;
 
-public interface IEmployee
+// Klasa bazowa dla dynamicznych zwierząt
+public abstract class DynamicAnimal
 {
-    void Work();
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public abstract void MakeSound();
+    public abstract void DescribeAnimal();
 }
 
-public interface IStudent
+// Dynamiczne ssaki
+public class DynamicMammal : DynamicAnimal
 {
-    void Study();
-}
-
-// Overlapping (dziedziczenie łączne)
-public class WorkingStudent : IEmployee, IStudent
-{
-    public void Work()
+    public DynamicMammal(string name, int age)
     {
-        Console.WriteLine("Working");
+        Name = name;
+        Age = age;
     }
-
-    public void Study()
-    {
-        Console.WriteLine("Studying");
-    }
-}
-
-// Dziedziczenie dynamiczne
-public abstract class DynamicAnimal : Animal
-{
-    protected DynamicAnimal(string name, int age) : base(name, age) { }
-
-    // Możliwość zmiany typu w trakcie działania
-    public abstract void ChangeType();
-}
-
-public class DynamicLion : DynamicAnimal
-{
-    public DynamicLion(string name, int age) : base(name, age) { }
 
     public override void MakeSound()
     {
-        Console.WriteLine("Dynamic Roar");
+        Console.WriteLine($"{Name} makes a mammal sound.");
     }
 
-    public override void ChangeType()
+    public override void DescribeAnimal()
     {
-        Console.WriteLine("Changing type from Lion to another animal");
+        Console.WriteLine($"{Name} is a mammal.");
+    }
+}
+
+// Dynamiczne gady
+public class DynamicReptile : DynamicAnimal
+{
+    public DynamicReptile(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} hisses.");
+    }
+
+    public override void DescribeAnimal()
+    {
+        Console.WriteLine($"{Name} is a reptile.");
+    }
+}
+
+// Klasa, która łączy dynamiczne zwierzęta z ich środowiskiem życia
+public class DynamicHabitatAnimal
+{
+    private DynamicAnimal _animal;
+    private IHabitat _habitat;
+
+    public DynamicHabitatAnimal(DynamicAnimal animal, IHabitat habitat)
+    {
+        _animal = animal;
+        _habitat = habitat;
+    }
+
+    public void MakeSound()
+    {
+        _animal.MakeSound();
+    }
+
+    public void DescribeAnimal()
+    {
+        _animal.DescribeAnimal();
+    }
+
+    public void DescribeHabitat()
+    {
+        _habitat.DescribeHabitat();
+    }
+
+    public void ChangeAnimal(DynamicAnimal newAnimal)
+    {
+        _animal = newAnimal;
+    }
+
+    public void ChangeHabitat(IHabitat newHabitat)
+    {
+        _habitat = newHabitat;
     }
 }

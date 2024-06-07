@@ -4,87 +4,82 @@ public abstract class Animal
 {
     public string Name { get; set; }
     public int Age { get; set; }
+    public abstract void MakeSound();
+}
 
-    public Animal(string name, int age)
+// Typ zwierzęcia - Ssaki
+public class Mammal : Animal
+{
+    public Mammal(string name, int age)
     {
         Name = name;
         Age = age;
     }
 
-    public abstract void MakeSound();
+    public override void MakeSound()
+    {
+        Console.WriteLine($"{Name} makes a mammal sound.");
+    }
 }
 
-// Aspekt płci (Wieloaspektowe dziedziczenie)
-public abstract class MaleAnimal : Animal
+// Typ zwierzęcia - Gady
+public class Reptile : Animal
 {
-    protected MaleAnimal(string name, int age) : base(name, age) { }
-
-    public abstract void DisplayGender();
-}
-
-public abstract class FemaleAnimal : Animal
-{
-    protected FemaleAnimal(string name, int age) : base(name, age) { }
-
-    public abstract void DisplayGender();
-}
-
-public class MaleLion : MaleAnimal
-{
-    public MaleLion(string name, int age) : base(name, age) { }
+    public Reptile(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
 
     public override void MakeSound()
     {
-        Console.WriteLine("Roar");
-    }
-
-    public override void DisplayGender()
-    {
-        Console.WriteLine($"{Name} is a male lion.");
+        Console.WriteLine($"{Name} hisses.");
     }
 }
 
-public class FemaleLion : FemaleAnimal
+// Środowisko życia - Interfejs
+public interface IHabitat
 {
-    public FemaleLion(string name, int age) : base(name, age) { }
+    void DescribeHabitat();
+}
 
-    public override void MakeSound()
+// Środowisko życia - Lądowe
+public class LandHabitat : IHabitat
+{
+    public void DescribeHabitat()
     {
-        Console.WriteLine("Roar");
-    }
-
-    public override void DisplayGender()
-    {
-        Console.WriteLine($"{Name} is a female lion.");
+        Console.WriteLine("Lives on land.");
     }
 }
 
-public class MaleEagle : MaleAnimal
+// Środowisko życia - Wodne
+public class WaterHabitat : IHabitat
 {
-    public MaleEagle(string name, int age) : base(name, age) { }
-
-    public override void MakeSound()
+    public void DescribeHabitat()
     {
-        Console.WriteLine("Screech");
-    }
-
-    public override void DisplayGender()
-    {
-        Console.WriteLine($"{Name} is a male eagle.");
+        Console.WriteLine("Lives in water.");
     }
 }
 
-public class FemaleEagle : FemaleAnimal
+// Klasa wieloaspektowa, która łączy cechy zwierzęcia i jego środowiska życia
+public class MultiAspectAnimal : Animal
 {
-    public FemaleEagle(string name, int age) : base(name, age) { }
+    private readonly Animal _animal;
+    private readonly IHabitat _habitat;
+
+    public MultiAspectAnimal(Animal animal, IHabitat habitat)
+    {
+        _animal = animal;
+        _habitat = habitat;
+    }
 
     public override void MakeSound()
     {
-        Console.WriteLine("Screech");
+        _animal.MakeSound();
     }
 
-    public override void DisplayGender()
+    public void DescribeHabitat()
     {
-        Console.WriteLine($"{Name} is a female eagle.");
+        _habitat.DescribeHabitat();
     }
 }

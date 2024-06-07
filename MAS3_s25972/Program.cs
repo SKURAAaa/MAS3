@@ -7,35 +7,60 @@ public class Program
         Zoo zoo = new Zoo("City Zoo");
 
         Enclosure lionEnclosure = new Enclosure("Lion Enclosure");
-        Enclosure eagleEnclosure = new Enclosure("Eagle Enclosure");
+        Enclosure reptileEnclosure = new Enclosure("Reptile Enclosure");
 
-        MaleLion maleLion = new MaleLion("Leo", 5);
-        FemaleLion femaleLion = new FemaleLion("Leona", 4);
-        MaleEagle maleEagle = new MaleEagle("Eddie", 3);
-        FemaleEagle femaleEagle = new FemaleEagle("Edna", 2);
+        // Wieloaspektowe zwierzęta
+        Animal lion = new Mammal("Leo", 5);
+        IHabitat landHabitat = new LandHabitat();
+        MultiAspectAnimal landLion = new MultiAspectAnimal(lion, landHabitat);
 
-        lionEnclosure.AddAnimal(maleLion);
-        lionEnclosure.AddAnimal(femaleLion);
-        eagleEnclosure.AddAnimal(maleEagle);
-        eagleEnclosure.AddAnimal(femaleEagle);
+        Animal crocodile = new Reptile("Croc", 12);
+        IHabitat waterHabitat = new WaterHabitat();
+        MultiAspectAnimal waterCrocodile = new MultiAspectAnimal(crocodile, waterHabitat);
+
+        lionEnclosure.AddAnimal(landLion);
+        reptileEnclosure.AddAnimal(waterCrocodile);
 
         zoo.AddEnclosure(lionEnclosure);
-        zoo.AddEnclosure(eagleEnclosure);
+        zoo.AddEnclosure(reptileEnclosure);
 
         Keeper john = new Keeper { Name = "John", Experience = 10 };
+        zoo.AddKeeper(john);
 
-        zoo.AssignKeeperToAnimal(maleLion, john);
-        zoo.AssignKeeperToAnimal(femaleLion, john);
-        zoo.AssignKeeperToAnimal(maleEagle, john);
-        zoo.AssignKeeperToAnimal(femaleEagle, john);
+        zoo.AssignKeeperToAnimal(landLion, john);
+        zoo.AssignKeeperToAnimal(waterCrocodile, john);
 
-        // Overlapping and dynamic inheritance examples
-        WorkingStudent workingStudent = new WorkingStudent();
+        // Dynamiczne zwierzęta
+        DynamicAnimal dynamicLion = new DynamicMammal("Leo", 5);
+        DynamicHabitatAnimal dynamicAnimal = new DynamicHabitatAnimal(dynamicLion, landHabitat);
+
+        dynamicAnimal.MakeSound();
+        dynamicAnimal.DescribeAnimal();
+        dynamicAnimal.DescribeHabitat();
+
+        DynamicAnimal dynamicCrocodile = new DynamicReptile("Croc", 12);
+        dynamicAnimal.ChangeAnimal(dynamicCrocodile);
+        dynamicAnimal.ChangeHabitat(waterHabitat);
+
+        dynamicAnimal.MakeSound();
+        dynamicAnimal.DescribeAnimal();
+        dynamicAnimal.DescribeHabitat();
+        
+        // Overlapping examples
+        Employee employee = new Employee("Alice", 30, 3000);
+        Student student = new Student("Bob", 20, 1000);
+        Pensioner pensioner = new Pensioner("Charlie", 65, 1500);
+        WorkingStudent workingStudent = new WorkingStudent("Dave", 25, 2000, 500);
+
+        employee.Work();
+        student.Study();
+        pensioner.Relax();
         workingStudent.Work();
         workingStudent.Study();
 
-        DynamicLion dynamicLion = new DynamicLion("Dynamic Leo", 4);
-        dynamicLion.MakeSound();
-        dynamicLion.ChangeType();
+        Console.WriteLine($"Employee Income: {employee.GetIncome()}");
+        Console.WriteLine($"Student Income: {student.GetIncome()}");
+        Console.WriteLine($"Pensioner Income: {pensioner.GetIncome()}");
+        Console.WriteLine($"WorkingStudent Total Income: {workingStudent.GetIncome()}");
     }
 }

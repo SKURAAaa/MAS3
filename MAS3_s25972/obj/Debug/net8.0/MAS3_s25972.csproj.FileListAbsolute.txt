@@ -12,3 +12,4 @@ C:\Users\Kacper\RiderProjects\MAS3_s25972\MAS3_s25972\obj\Debug\net8.0\refint\MA
 C:\Users\Kacper\RiderProjects\MAS3_s25972\MAS3_s25972\obj\Debug\net8.0\MAS3_s25972.pdb
 C:\Users\Kacper\RiderProjects\MAS3_s25972\MAS3_s25972\obj\Debug\net8.0\MAS3_s25972.genruntimeconfig.cache
 C:\Users\Kacper\RiderProjects\MAS3_s25972\MAS3_s25972\obj\Debug\net8.0\ref\MAS3_s25972.dll
+C:\Users\Kacper\RiderProjects\MAS3_s25972\MAS3_s25972\obj\Debug\net8.0\MAS3_s25972.sourcelink.json
